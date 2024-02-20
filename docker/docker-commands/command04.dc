@@ -1,0 +1,6 @@
+# docker é usado para interagir  com o "docker"
+# exec é usado para executar comandos dentro dos containers que já estão em execução
+# nome do container
+# comando que deseja executar dentro do container (cat /etc/os-release)
+
+docker exec 01container cat /etc/os-release

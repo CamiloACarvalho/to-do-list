@@ -1,1 +1,5 @@
+# Para criar um container novo: "docker contair create -it"
+# Para nomear o container criado: "--name (nome do container)"
+# Para que esse container tenha uma determinada imagem com versão "(nome da imagem):(versão)"
+
 docker container create -it --name 01container alpine:3.12
