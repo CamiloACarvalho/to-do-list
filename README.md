@@ -1,5 +1,5 @@
 # :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
+<!--
 1. Crie um container em modo interativo, sem rodá-lo, nomeando-o como 01container e utilizando a imagem alpine na versão 3.12
 
 # Para criar um container novo: "docker contair create -it"
