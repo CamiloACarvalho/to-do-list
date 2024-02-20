@@ -1,0 +1,37 @@
+# A versão 3 é uma das versões mais recentes e suporta uma série de recursos avançados e melhores práticas de composição de contêineres
+version: '3'
+# Aqui é onde definimos os serviços que irão compor a aplicação.
+services:
+  # Este é o nome do serviço que estamos definindo. Ele será usado para referenciar este serviço em outros lugares do arquivo.
+  todofrontend:
+    # Aqui estamos usando a imagem que criamos no Dockerfile. Isso significa que o Dockerfile deve estar no mesmo diretório que este arquivo.
+    image: todofrontend
+    # Aqui estamos mapeando a porta 3000 do contêiner para a porta 3000 do host. Isso significa que podemos acessar o aplicativo em http://localhost:3000.
+    ports:
+      - "3000:3000"
+    # Aqui estamos definindo uma variável de ambiente que será usada pelo aplicativo para acessar o backend.
+    # Isso é necessário porque o aplicativo frontend e o backend estão em contêineres separados.
+    environment:
+      - REACT_APP_API_HOST=todobackend
+    # Aqui estamos dizendo que este serviço depende do serviço todobackend.
+    # Isso significa que o serviço todofrontend só será iniciado depois que o serviço todobackend estiver pronto.
+    depends_on:
+      - todobackend
+  # Este é o serviço que representa o backend da aplicação.    
+  todobackend:
+    # Aqui estamos usando a imagem que criamos no Dockerfile dentro da pasta do backend.
+    image: todobackend
+    ports:
+      - "3001:3001"
+  todotests:
+    image: todotests
+    # O environment é usado para definir variáveis de ambiente que serão usadas pelo aplicativo.
+    environment:
+      - FRONT_HOST=todofrontend
+    # Aqui estamos dizendo que este serviço depende do serviço do front-end e do serviço do back-end.
+    depends_on:
+      - todofrontend
+      - todobackend
+
+  
+  
