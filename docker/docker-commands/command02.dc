@@ -1,4 +1,1 @@
-# Para dar início ao container "docker start (nome do container)"
-
 docker start 01container
-

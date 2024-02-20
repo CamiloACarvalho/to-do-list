@@ -1,8 +1,1 @@
-# Para filtrar um determinado container "docker --filter (alguns comandos)"
-# Alguns comando são:
-  # "status=runing" - filtra apenas os que estão rodando
-  # "name=(nome do container desejado)" - filtras determinado container pelo nome
-  # Pode também aplicar os dois filtros --filter "status=runing" --filter "name=(nome)"
-# Caso queira listar esse container usar "ps" depois do docker: "docker ps..."
-
-docker --filter "name=01container"
+docker ps --filter "name=01container"
