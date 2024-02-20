@@ -1,10 +1,13 @@
 # A versão 3 é uma das versões mais recentes e suporta uma série de recursos avançados e melhores práticas de composição de contêineres
+# Solicitação do projeto
 version: '3'
 # Aqui é onde definimos os serviços que irão compor a aplicação.
 services:
   # Este é o nome do serviço que estamos definindo. Ele será usado para referenciar este serviço em outros lugares do arquivo.
-  todofrontend:
+  # Aqui acabei criando um contianer para o frontend, backend e para os testes.
+  todofront:
     # Aqui estamos usando a imagem que criamos no Dockerfile. Isso significa que o Dockerfile deve estar no mesmo diretório que este arquivo.
+    # Aqui estamos usando todofrontend porque já foi criado um container com esse nome
     image: todofrontend
     # Aqui estamos mapeando a porta 3000 do contêiner para a porta 3000 do host. Isso significa que podemos acessar o aplicativo em http://localhost:3000.
     ports:
@@ -12,26 +15,29 @@ services:
     # Aqui estamos definindo uma variável de ambiente que será usada pelo aplicativo para acessar o backend.
     # Isso é necessário porque o aplicativo frontend e o backend estão em contêineres separados.
     environment:
-      - REACT_APP_API_HOST=todobackend
+    # Já aqui, estamos usando o container todoback que foi o container criado dentro service
+      - REACT_APP_API_HOST=todoback
     # Aqui estamos dizendo que este serviço depende do serviço todobackend.
     # Isso significa que o serviço todofrontend só será iniciado depois que o serviço todobackend estiver pronto.
     depends_on:
-      - todobackend
+    # Mesma coisa aqui, o todoback é o nome do container que foi criado dentro do service para o backend
+      - todoback
+
   # Este é o serviço que representa o backend da aplicação.    
-  todobackend:
+  todoback:
     # Aqui estamos usando a imagem que criamos no Dockerfile dentro da pasta do backend.
     image: todobackend
     ports:
       - "3001:3001"
+
   todotests:
     image: todotests
     # O environment é usado para definir variáveis de ambiente que serão usadas pelo aplicativo.
     environment:
-      - FRONT_HOST=todofrontend
+      - FRONT_HOST=todofront
     # Aqui estamos dizendo que este serviço depende do serviço do front-end e do serviço do back-end.
     depends_on:
-      - todofrontend
-      - todobackend
+      - todofront
 
   
   
